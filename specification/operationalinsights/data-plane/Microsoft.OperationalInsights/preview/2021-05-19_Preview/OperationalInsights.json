@@ -1336,7 +1336,7 @@
       "description": "An single request in a batch.",
       "properties": {
         "id": {
-          "description": "The error details.",
+          "description": "Unique ID corresponding to each request.",
           "type": "string"
         },
         "headers": {
@@ -1349,12 +1349,14 @@
           "$ref": "#/definitions/queryBody"
         },
         "path": {
+          "description": "The query path of a single request in a batch, defaults to /query.",
           "type": "string",
           "enum": [
             "/query"
           ]
         },
         "method": {
+          "description": "The method of a single request in a batch, defaults to POST.",
           "type": "string",
           "enum": [
             "POST"
@@ -1386,6 +1388,7 @@
     },
     "batchQueryResponse": {
       "type": "object",
+      "description": "Contains the batch query response and the headers, id, and status of the request.",
       "properties": {
         "id": {
           "type": "string"

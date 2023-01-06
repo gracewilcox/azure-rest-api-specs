@@ -87,7 +87,7 @@
       "post": {
         "operationId": "Query_Execute",
         "summary": "Execute an Analytics query",
-        "description": "Executes an Analytics query for data. [Here](https://dev.loganalytics.io/documentation/Using-the-API) is an example for using POST with an Analytics query.",
+        "description": "Executes an Analytics query for data.",
         "x-ms-examples": {
           "simple-query": {
             "$ref": "examples/oms-post-example.json"
@@ -187,7 +187,7 @@
       "post": {
         "operationId": "Query_Batch",
         "summary": "Execute a batch of Analytics queries",
-        "description": "Executes a batch of Analytics queries for data. [Here](https://dev.loganalytics.io/documentation/Using-the-API) is an example for using POST with an Analytics query.",
+        "description": "Executes a batch of Analytics queries for data.",
         "x-ms-examples": {
           "metadataPost": {
             "$ref": "examples/batch-query-example.json"
@@ -306,7 +306,7 @@
           "$ref": "#/definitions/timespanParam"
         },
         "workspaces": {
-          "description": "A list of workspaces that are included in the query.",
+          "description": "A list of workspaces IDs to query in addition to the primary workspace ID.",
           "$ref": "#/definitions/workspacesParam"
         }
       },
@@ -1340,6 +1340,7 @@
           "type": "string"
         },
         "headers": {
+          "description": "Headers for the request.",
           "type": "object",
           "additionalProperties": {
             "type": "string"

@@ -320,7 +320,7 @@
       "type": "object",
       "properties": {
         "tables": {
-          "description": "The list of tables, columns and rows.",
+          "description": "The query results in tabular format.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/table"
@@ -1415,7 +1415,7 @@
       "type": "object",
       "properties": {
         "tables": {
-          "description": "The list of tables, columns and rows.",
+          "description": "The query results in tabular format.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/table"

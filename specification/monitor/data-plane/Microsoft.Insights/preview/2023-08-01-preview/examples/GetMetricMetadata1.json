@@ -1,0 +1,94 @@
+{
+    "parameters": {
+      "baseUrl": "https://amwMyAppMetrics-f13o.eastus2.metrics.monitor.azure.com/namespaces/Microsoft.Storage%2FstorageAccounts%2FblobServices/metrics/StoragePremiumMetricName1",
+      "namespaceName": "Microsoft.Storage/storageAccounts/blobServices",
+      "metricName": "StoragePremiumMetricName1",
+      "api-version": "2023-08-01-preview"
+    },
+    "responses": {
+      "200": {
+        "body": {
+          "metricName": "StoragePremiumMetricName1",
+          "primaryAggregationType": "average",
+          "minimumTimeInterval": 60000,
+          "aggregationTypes": {
+            "total": {
+              "dimensionSets": [
+                [
+                  "Result",
+                  "Code",
+                  "Region",
+                  "Target"
+                ]
+              ]
+            },
+            "count": {
+              "dimensionSets": [
+                [
+                  "Result",
+                  "Code",
+                  "Region",
+                  "Target"
+                ]
+              ]
+            },
+            "average": {
+              "dimensionSets": [
+                [
+                  "Result",
+                  "Code"
+                ]
+              ]
+            },
+            "minimum": {
+              "dimensionSets": [
+                [
+                  "Result",
+                  "Code",
+                  "Region"
+                ],
+                [
+                  "Result",
+                  "Target"
+                ]
+              ]
+            },
+            "maximum": {
+              "dimensionSets": [
+                [
+                  "Result",
+                  "Code",
+                  "Region"
+                ],
+                [
+                  "Result",
+                  "Target"
+                ]
+              ]
+            }
+          }
+        }
+      },
+      "default": {
+        "headers": {
+          "x-ms-error-code": "BadRequest"
+        },
+        "body": {
+          "error": {
+            "additionalInfo": [
+              {
+                "type": "string",
+                "info": "TraceId={00000000-0000-0000-0000-000000000000}"
+              },
+              {
+                "type": "string",
+                "info": "ExceptionType=Microsoft.Online.Metrics.MetricsMP.Utilities.RPRequestFormatException"
+              }
+            ],
+            "code": "BadRequest",
+            "message": "Invalid request, traceId: {00000000-0000-0000-0000-000000000000}"
+          }
+        }
+      }
+    }
+  }

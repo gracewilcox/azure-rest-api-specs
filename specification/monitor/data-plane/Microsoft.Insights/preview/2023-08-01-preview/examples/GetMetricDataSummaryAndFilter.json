@@ -1,0 +1,287 @@
+{
+    "parameters": {
+      "baseUrl": "https://amwMyAppMetrics-f13o.eastus2.metrics.monitor.azure.com/namespaces/Microsoft.Storage%2FstorageAccounts%2FblobServices/metricData",
+      "startTime": "2021-04-20T09:00:00.000Z",
+      "endTime": "2021-04-20T14:00:00.000Z",
+      "namespaceName": "Microsoft.Storage/storageAccounts/blobServices",
+      "metricnames": "BlobCount,BlobCapacity",
+      "$filter": "Tier eq '*'",
+      "top": 5,
+      "orderby": "average asc",
+      "aggregation": "average,minimum,maximum",
+      "includeSummary": "true",
+      "intervalMs": 3600000,
+      "api-version": "2023-08-01-preview"
+    },
+    "responses": {
+      "200": {
+        "body": {
+          "startTime": "2021-04-20T09:00:00Z",
+          "endTime": "2021-04-20T14:00:00Z",
+          "intervalMs": 3600000,
+          "value": [
+            {
+              "name": "BlobCount",
+              "displayName": "Blob Count",
+              "unit": "Count",
+              "timeSeries": [
+                {
+                  "metadatavalues": [
+                    {
+                      "name": "tier",
+                      "displayName": "tier",
+                      "value": "Hot"
+                    }
+                  ],
+                  "summary": {
+                    "average": 7.0,
+                    "minimum": 7.0,
+                    "maximum": 7.0
+                  },
+                  "data": [
+                    {
+                      "timeStamp": "2021-04-20T09:00:00Z",
+                      "average": 7.0,
+                      "minimum": 7.0,
+                      "maximum": 7.0
+                    },
+                    {
+                      "timeStamp": "2021-04-20T10:00:00Z",
+                      "average": 7.0,
+                      "minimum": 7.0,
+                      "maximum": 7.0
+                    },
+                    {
+                      "timeStamp": "2021-04-20T11:00:00Z",
+                      "average": 7.0,
+                      "minimum": 7.0,
+                      "maximum": 7.0
+                    },
+                    {
+                      "timeStamp": "2021-04-20T12:00:00Z",
+                      "average": 7.0,
+                      "minimum": 7.0,
+                      "maximum": 7.0
+                    },
+                    {
+                      "timeStamp": "2021-04-20T13:00:00Z",
+                      "average": 7.0,
+                      "minimum": 7.0,
+                      "maximum": 7.0
+                    }
+                  ]
+                },
+                {
+                  "metadatavalues": [
+                    {
+                      "name": "tier",
+                      "displayName": "tier",
+                      "value": "Standard"
+                    }
+                  ],
+                  "summary": {
+                    "average": 2.0,
+                    "minimum": 2.0,
+                    "maximum": 2.0
+                  },
+                  "data": [
+                    {
+                      "timeStamp": "2021-04-20T09:00:00Z",
+                      "average": 2.0,
+                      "minimum": 2.0,
+                      "maximum": 2.0
+                    },
+                    {
+                      "timeStamp": "2021-04-20T10:00:00Z",
+                      "average": 2.0,
+                      "minimum": 2.0,
+                      "maximum": 2.0
+                    },
+                    {
+                      "timeStamp": "2021-04-20T11:00:00Z",
+                      "average": 2.0,
+                      "minimum": 2.0,
+                      "maximum": 2.0
+                    },
+                    {
+                      "timeStamp": "2021-04-20T12:00:00Z",
+                      "average": 2.0,
+                      "minimum": 2.0,
+                      "maximum": 2.0
+                    },
+                    {
+                      "timeStamp": "2021-04-20T13:00:00Z",
+                      "average": 2.0,
+                      "minimum": 2.0,
+                      "maximum": 2.0
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "BlobCapacity",
+              "displayName": "Blob Capacity",
+              "unit": "Bytes",
+              "timeSeries": [
+                {
+                  "metadatavalues": [
+                    {
+                      "name": "tier",
+                      "displayName": "tier",
+                      "value": "Standard"
+                    }
+                  ],
+                  "summary": {
+                    "average": 621492.0,
+                    "minimum": 621492.0,
+                    "maximum": 621492.0
+                  },
+                  "data": [
+                    {
+                      "timeStamp": "2021-04-20T09:00:00Z",
+                      "average": 621492.0,
+                      "minimum": 621492.0,
+                      "maximum": 621492.0
+                    },
+                    {
+                      "timeStamp": "2021-04-20T10:00:00Z",
+                      "average": 621492.0,
+                      "minimum": 621492.0,
+                      "maximum": 621492.0
+                    },
+                    {
+                      "timeStamp": "2021-04-20T11:00:00Z",
+                      "average": 621492.0,
+                      "minimum": 621492.0,
+                      "maximum": 621492.0
+                    },
+                    {
+                      "timeStamp": "2021-04-20T12:00:00Z",
+                      "average": 621492.0,
+                      "minimum": 621492.0,
+                      "maximum": 621492.0
+                    },
+                    {
+                      "timeStamp": "2021-04-20T13:00:00Z",
+                      "average": 621492.0,
+                      "minimum": 621492.0,
+                      "maximum": 621492.0
+                    }
+                  ]
+                },
+                {
+                  "metadatavalues": [
+                    {
+                      "name": "tier",
+                      "displayName": "tier",
+                      "value": "Hot"
+                    }
+                  ],
+                  "summary": {
+                    "average": 4733.0,
+                    "minimum": 4733.0,
+                    "maximum": 4733.0
+                  },
+                  "data": [
+                    {
+                      "timeStamp": "2021-04-20T09:00:00Z",
+                      "average": 4733.0,
+                      "minimum": 4733.0,
+                      "maximum": 4733.0
+                    },
+                    {
+                      "timeStamp": "2021-04-20T10:00:00Z",
+                      "average": 4733.0,
+                      "minimum": 4733.0,
+                      "maximum": 4733.0
+                    },
+                    {
+                      "timeStamp": "2021-04-20T11:00:00Z",
+                      "average": 4733.0,
+                      "minimum": 4733.0,
+                      "maximum": 4733.0
+                    },
+                    {
+                      "timeStamp": "2021-04-20T12:00:00Z",
+                      "average": 4733.0,
+                      "minimum": 4733.0,
+                      "maximum": 4733.0
+                    },
+                    {
+                      "timeStamp": "2021-04-20T13:00:00Z",
+                      "average": 4733.0,
+                      "minimum": 4733.0,
+                      "maximum": 4733.0
+                    }
+                  ]
+                },
+                {
+                  "metadatavalues": [
+                    {
+                      "name": "tier",
+                      "displayName": "tier",
+                      "value": "Archive"
+                    }
+                  ],
+                  "data": [
+                    {
+                      "timeStamp": "2021-04-20T09:00:00Z",
+                      "average": 0.0,
+                      "minimum": 0.0,
+                      "maximum": 0.0
+                    },
+                    {
+                      "timeStamp": "2021-04-20T10:00:00Z",
+                      "average": 0.0,
+                      "minimum": 0.0,
+                      "maximum": 0.0
+                    },
+                    {
+                      "timeStamp": "2021-04-20T11:00:00Z",
+                      "average": 0.0,
+                      "minimum": 0.0,
+                      "maximum": 0.0
+                    },
+                    {
+                      "timeStamp": "2021-04-20T12:00:00Z",
+                      "average": 0.0,
+                      "minimum": 0.0,
+                      "maximum": 0.0
+                    },
+                    {
+                      "timeStamp": "2021-04-20T13:00:00Z",
+                      "average": 0.0,
+                      "minimum": 0.0,
+                      "maximum": 0.0
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "default": {
+        "headers": {
+          "x-ms-error-code": "BadRequest"
+        },
+        "body": {
+          "error": {
+            "additionalInfo": [
+              {
+                "type": "string",
+                "info": "TraceId={00000000-0000-0000-0000-000000000000}"
+              },
+              {
+                "type": "string",
+                "info": "ExceptionType=Microsoft.Online.Metrics.MetricsMP.Utilities.RPRequestFormatException"
+              }
+            ],
+            "code": "BadRequest",
+            "message": "Query endTime: 06/06/2021 00:00:00 is out of the Max metrics retention period: 93.00:00:00, traceId: {00000000-0000-0000-0000-000000000000}"
+          }
+        }
+      }
+    }
+  }

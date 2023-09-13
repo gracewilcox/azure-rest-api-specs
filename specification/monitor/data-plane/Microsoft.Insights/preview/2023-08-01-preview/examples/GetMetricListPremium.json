@@ -1,0 +1,54 @@
+{
+    "parameters": {
+      "baseUrl": "https://amwMyAppMetrics-f13o.eastus2.metrics.monitor.azure.com/namespaces/Microsoft.Storage%2FstorageAccounts%2FblobServices/metrics",
+      "namespaceName": "Microsoft.Storage/storageAccounts/blobServices",
+      "api-version": "2023-08-01-preview"
+    },
+    "responses": {
+      "200": {
+        "body": {
+          "value": [
+            {
+              "metricName": "StoragePremiumMetricName1",
+              "displayName": "Storage Premium Metric Name 1",
+              "description": "Storage Premium metric description",
+              "unit": "Bytes",
+              "primaryAggregationType": "total",
+              "minimumTimeInterval": 300000,
+              "category": "Premium"
+            },
+            {
+              "metricName": "StoragePremiumMetricName2",
+              "displayName": "Storage Premium Metric Name 2",
+              "description": "Storage Premium metric description",
+              "unit": "BytesPerSecond",
+              "primaryAggregationType": "average",
+              "minimumTimeInterval": 60000,
+              "category": "Premium"
+            }
+          ]
+        }
+      },
+      "default": {
+        "headers": {
+          "x-ms-error-code": "BadRequest"
+        },
+        "body": {
+          "error": {
+            "additionalInfo": [
+              {
+                "type": "string",
+                "info": "TraceId={00000000-0000-0000-0000-000000000000}"
+              },
+              {
+                "type": "string",
+                "info": "ExceptionType=Microsoft.Online.Metrics.MetricsMP.Utilities.RPRequestFormatException"
+              }
+            ],
+            "code": "BadRequest",
+            "message": "Invalid request, traceId: {00000000-0000-0000-0000-000000000000}"
+          }
+        }
+      }
+    }
+  }

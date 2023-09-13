@@ -1,0 +1,848 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "title": "Azure Monitor Metrics List API",
+      "version": "2023-08-01-preview"
+    },
+    "securityDefinitions": {
+      "AADToken": {
+        "type": "oauth2",
+        "tokenUrl": "https://login.microsoftonline.com/common/oauth2/v2.0/token",
+        "flow": "application",
+        "description": "Azure Active Directory OAuth2 Authentication",
+        "scopes": {
+          "https://metrics.monitor.azure.com/.default": "https://metrics.monitor.azure.com/.default"
+        }
+      }
+    },
+    "security": [
+      {
+        "AADToken": [
+          "https://metrics.monitor.azure.com/.default"
+        ]
+      }
+    ],
+    "x-ms-parameterized-host": {
+      "hostTemplate": "{baseUrl}",
+      "useSchemePrefix": false,
+      "positionInOperation": "first",
+      "parameters": [
+        {
+          "name": "baseUrl",
+          "description": "A unique hostname per Azure Monitor Workspace (AMW) resource, following the pattern <AMW Id>.<region of AMW>.metrics.monitor.azure.com. For example: amwMyAppMetrics-f13o.eastus2.metrics.monitor.azure.com",
+          "required": true,
+          "type": "string",
+          "in": "path",
+          "x-ms-skip-url-encoding": true
+        }
+      ]
+    },
+    "consumes": [
+      "application/json"
+    ],
+    "produces": [
+      "application/json"
+    ],
+    "paths": {
+      "/namespaces": {
+        "get": {
+          "tags": [
+            "AzureMonitorMetrics"
+          ],
+          "operationId": "MetricsDataplaneNamespaces_List",
+          "description": "Lists the metric namespaces for the resource.",
+          "parameters": [
+            {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            }
+          ],
+          "responses": {
+            "default": {
+              "description": "Error response describing why the operation failed.",
+              "headers": {
+                "x-ms-error-code": {
+                  "type": "string",
+                  "description": "Error code for specific error that occurred."
+                }
+              },
+              "schema": {
+                "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorResponse"
+              }
+            },
+            "200": {
+              "description": "Successful request to get the list of metric namespaces.",
+              "schema": {
+                "$ref": "#/definitions/MetricNamespaceCollection"
+              }
+            }
+          },
+          "x-ms-pageable": {
+            "nextLinkName": "nextLink"
+          },
+          "x-ms-examples": {
+            "Get list of Metric Namespaces": {
+              "$ref": "./examples/GetMetricNamespaces.json"
+            }
+          }
+        }
+      },
+      "/namespaces/{namespaceName}": {
+        "get": {
+          "tags": [
+            "AzureMonitorMetrics"
+          ],
+          "operationId": "MetricsDataplaneNamespaces_Get",
+          "description": "Gets information about a specific metric namespaces for the resource.",
+          "parameters": [
+            {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            },
+            {
+              "$ref": "#/parameters/MetricNamespaceParameter"
+            }
+          ],
+          "responses": {
+            "default": {
+              "description": "Error response describing why the operation failed.",
+              "headers": {
+                "x-ms-error-code": {
+                  "type": "string",
+                  "description": "Error code for specific error that occurred."
+                }
+              },
+              "schema": {
+                "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorResponse"
+              }
+            },
+            "200": {
+              "description": "Successful request to get information about a metric namespace.",
+              "schema": {
+                "$ref": "#/definitions/MetricNamespaceElement"
+              }
+            }
+          },
+          "x-ms-examples": {
+            "Get Metric Namespace": {
+              "$ref": "./examples/GetMetricNamespace.json"
+            }
+          }
+        }
+      },
+      "/namespaces/{namespaceName}/metrics": {
+        "get": {
+          "tags": [
+            "AzureMonitorMetrics"
+          ],
+          "operationId": "MetricsDataplaneMetricNames_List",
+          "description": "Lists the metrics available in the given metric namespace for the resource.",
+          "parameters": [
+            {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            },
+            {
+              "$ref": "#/parameters/MetricNamespaceParameter"
+            }
+          ],
+          "responses": {
+            "default": {
+              "description": "Error response describing why the operation failed.",
+              "headers": {
+                "x-ms-error-code": {
+                  "type": "string",
+                  "description": "Error code for specific error that occurred."
+                }
+              },
+              "schema": {
+                "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorResponse"
+              }
+            },
+            "200": {
+              "description": "Successful request to get the list of metric names.",
+              "schema": {
+                "$ref": "#/definitions/MetricsListResponse"
+              }
+            }
+          },
+          "x-ms-pageable": {
+            "nextLinkName": "nextLink"
+          },
+          "x-ms-examples": {
+            "Get Custom metrics list": {
+              "$ref": "./examples/GetMetricListCustom.json"
+            },
+            "Get Premium metrics list": {
+              "$ref": "./examples/GetMetricListPremium.json"
+            }
+          }
+        }
+      },
+      "/namespaces/{namespaceName}/metrics/{metricName}": {
+        "get": {
+          "tags": [
+            "AzureMonitorMetrics"
+          ],
+          "operationId": "MetricsDataplaneMetricMetadata_Get",
+          "description": "Gets the metric metadata for the specified metric.",
+          "parameters": [
+            {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            },
+            {
+              "$ref": "#/parameters/MetricNamespaceParameter"
+            },
+            {
+              "$ref": "#/parameters/MetricNameParameter"
+            }
+          ],
+          "responses": {
+            "default": {
+              "description": "Error response describing why the operation failed.",
+              "headers": {
+                "x-ms-error-code": {
+                  "type": "string",
+                  "description": "Error code for specific error that occurred."
+                }
+              },
+              "schema": {
+                "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorResponse"
+              }
+            },
+            "200": {
+              "description": "Successful request to get the metadata for the specified metric.",
+              "schema": {
+                "$ref": "#/definitions/MetricMetadataResponse"
+              }
+            }
+          },
+          "x-ms-examples": {
+            "Get Metric Metadata 1": {
+              "$ref": "./examples/GetMetricMetadata1.json"
+            },
+            "Get Metric Metadata 2": {
+              "$ref": "./examples/GetMetricMetadata2.json"
+            }
+          }
+        }
+      },
+      "/namespaces/{namespaceName}/metrics/{metricName}/dimensions/{dimensionName}": {
+        "get": {
+          "tags": [
+            "AzureMonitorMetrics"
+          ],
+          "operationId": "MetricsDataplaneDimensions_List",
+          "description": "Lists the dimension values for given dimension on a metric.",
+          "parameters": [
+            {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            },
+            {
+              "$ref": "#/parameters/MetricNamespaceParameter"
+            },
+            {
+              "$ref": "#/parameters/MetricNameParameter"
+            },
+            {
+              "$ref": "#/parameters/DimensionNameParameter"
+            },
+            {
+              "$ref": "./commonMonitoringTypes.json#/parameters/StartTimeParameter"
+            },
+            {
+              "$ref": "./commonMonitoringTypes.json#/parameters/EndTimeParameter"
+            },
+            {
+              "$ref": "./commonMonitoringTypes.json#/parameters/FilterParameter"
+            }
+          ],
+          "responses": {
+            "default": {
+              "description": "Error response describing why the operation failed.",
+              "headers": {
+                "x-ms-error-code": {
+                  "type": "string",
+                  "description": "Error code for specific error that occurred."
+                }
+              },
+              "schema": {
+                "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorResponse"
+              }
+            },
+            "200": {
+              "description": "Successful request to get the list of dimension values for given dimension on a metric.",
+              "schema": {
+                "$ref": "#/definitions/MetricsDataplaneDimensionValuesResponse"
+              }
+            }
+          },
+          "x-ms-examples": {
+            "Get Metric": {
+              "$ref": "./examples/GetDimensionValues.json"
+            }
+          }
+        }
+      },
+      "/namespaces/{namespaceName}/metricData": {
+        "get": {
+          "tags": [
+            "AzureMonitorMetrics"
+          ],
+          "operationId": "MetricsDataplaneMetricData_List",
+          "description": "Lists the metric timeseries data for one or more metrics.",
+          "parameters": [
+            {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            },
+            {
+              "$ref": "#/parameters/MetricNamespaceParameter"
+            },
+            {
+              "$ref": "./commonMonitoringTypes.json#/parameters/MetricNamesParameter"
+            },
+            {
+              "$ref": "./commonMonitoringTypes.json#/parameters/StartTimeParameter"
+            },
+            {
+              "$ref": "./commonMonitoringTypes.json#/parameters/EndTimeParameter"
+            },
+            {
+              "$ref": "#/parameters/IntervalMsParameter"
+            },
+            {
+              "$ref": "./commonMonitoringTypes.json#/parameters/AggregationsParameter"
+            },
+            {
+              "$ref": "./commonMonitoringTypes.json#/parameters/OrderByParameter"
+            },
+            {
+              "$ref": "./commonMonitoringTypes.json#/parameters/TopParameter"
+            },
+            {
+              "$ref": "./commonMonitoringTypes.json#/parameters/FilterParameter"
+            },
+            {
+              "$ref": "#/parameters/RollUpByParameter"
+            },
+            {
+              "$ref": "#/parameters/AutoAdjustTimeInterval"
+            },
+            {
+              "$ref": "#/parameters/ValidateDimensions"
+            },
+            {
+              "$ref": "#/parameters/IncludeSummary"
+            }
+          ],
+          "responses": {
+            "default": {
+              "description": "Error response describing why the operation failed.",
+              "headers": {
+                "x-ms-error-code": {
+                  "type": "string",
+                  "description": "Error code for specific error that occurred."
+                }
+              },
+              "schema": {
+                "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorResponse"
+              }
+            },
+            "200": {
+              "description": "Successful request to get the list of metric values.",
+              "schema": {
+                "$ref": "#/definitions/MetricsDataplaneMetricResponse"
+              }
+            }
+          },
+          "x-ms-examples": {
+            "Get Metric": {
+              "$ref": "./examples/GetMetricData.json"
+            },
+            "Get metric with summary and all aggregation types": {
+              "$ref": "./examples/GetMetricDataAllAggregationsSummaryNoFilter.json"
+            },
+            "Get metric with summary and filter": {
+              "$ref": "./examples/GetMetricDataSummaryAndFilter.json"
+            }
+          }
+        }
+      }
+    },
+    "parameters": {
+      "MetricNamespaceParameter": {
+        "name": "namespaceName",
+        "in": "path",
+        "required": true,
+        "type": "string",
+        "description": "Metric namespace where the metrics you want reside.",
+        "x-ms-parameter-location": "method"
+      },
+      "MetricNameParameter": {
+        "name": "metricName",
+        "in": "path",
+        "required": true,
+        "type": "string",
+        "description": "Metric name of the metric you are interested in.",
+        "x-ms-parameter-location": "method"
+      },
+      "DimensionNameParameter": {
+        "name": "dimensionName",
+        "in": "path",
+        "required": true,
+        "type": "string",
+        "description": "The name of the dimension whose values are to be retrieved.",
+        "x-ms-parameter-location": "method"
+      },
+      "IntervalMsParameter": {
+        "name": "intervalMs",
+        "in": "query",
+        "required": false,
+        "type": "integer",
+        "format": "int64",
+        "description": "The interval (amount of time represented by a single datapoint) of the query in MilliSeconds.",
+        "x-ms-parameter-location": "method"
+      },
+      "RollUpByParameter": {
+        "name": "rollupby",
+        "in": "query",
+        "required": false,
+        "type": "string",
+        "description": "Dimension name(s) to rollup results by. For example if you only want to see metric values with a filter like 'City eq Seattle or City eq Tacoma' but don't want to see separate values for each city, you can specify 'RollUpBy=City' to see the results for Seattle and Tacoma rolled up into one time series.",
+        "x-ms-parameter-location": "method"
+      },
+      "AutoAdjustTimeInterval": {
+        "name": "AutoAdjustTimeInterval",
+        "in": "query",
+        "required": false,
+        "type": "boolean",
+        "description": "When set to true, if the interval passed in is not supported by this metric, the API will return the result using the closest supported interval. When set to false, an error is returned for invalid interval parameters. Defaults to false.",
+        "x-ms-parameter-location": "method"
+      },
+      "ValidateDimensions": {
+        "name": "ValidateDimensions",
+        "in": "query",
+        "required": false,
+        "type": "boolean",
+        "description": "When set to false, invalid filter parameter values will be ignored. When set to true, an error is returned for invalid filter parameters. Defaults to true.",
+        "x-ms-parameter-location": "method"
+      },
+      "IncludeSummary": {
+        "name": "IncludeSummary",
+        "in": "query",
+        "required": false,
+        "type": "boolean",
+        "description": "When set to true, summary data for each time series will be included in the return. Defaults to false.",
+        "x-ms-parameter-location": "method"
+      }
+    },
+    "definitions": {
+      "MetricNamespaceCollection": {
+        "type": "object",
+        "description": "Collection of metric namespaces applicable to the scope of the request.",
+        "properties": {
+          "value": {
+            "description": "The values for the metric namespaces.",
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/MetricNamespaceElement"
+            }
+          },
+          "nextLink": {
+            "description": "The URL to use for getting the next set of results.",
+            "type": "string"
+          }
+        },
+        "required": [
+          "value"
+        ]
+      },
+      "MetricNamespaceElement": {
+        "type": "object",
+        "description": "The metadata for an individual metric namespace.",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The name of the namespace."
+          },
+          "displayName": {
+            "type": "string",
+            "description": "The display name of the namespace."
+          },
+          "classification": {
+            "$ref": "#/definitions/NamespaceClassification",
+            "description": "Kind of namespace"
+          }
+        },
+        "required": [
+          "name"
+        ]
+      },
+      "NamespaceClassification": {
+        "type": "string",
+        "description": "Kind of namespace",
+        "enum": [
+          "Platform",
+          "Custom",
+          "Premium"
+        ],
+        "x-ms-enum": {
+          "name": "NamespaceClassification",
+          "modelAsString": true
+        }
+      },
+      "MetricsListResponse": {
+        "type": "object",
+        "description": "List of metrics contained in a metric namespace.",
+        "properties": {
+          "value": {
+            "type": "array",
+            "description": "List of metrics contained in a metric namespace.",
+            "items": {
+              "$ref": "#/definitions/MetricsListElement"
+            }
+          },
+          "nextLink": {
+            "description": "The URL to use for getting the next set of results.",
+            "type": "string"
+          }
+        },
+        "required": [
+          "value"
+        ]
+      },
+      "MetricsListElement": {
+        "type": "object",
+        "description": "The metadata for an individual metric in a list.",
+        "properties": {
+          "metricName": {
+            "type": "string",
+            "description": "The name of the metric."
+          },
+          "displayName": {
+            "type": "string",
+            "description": "The display name of the metric."
+          },
+          "description": {
+            "type": "string",
+            "description": "A description of what the metric represents."
+          },
+          "unit": {
+            "$ref": "./commonMonitoringTypes.json#/definitions/MetricUnit",
+            "description": "The unit of the metric."
+          },
+          "primaryAggregationType": {
+            "$ref": "./commonMonitoringTypes.json#/definitions/MetricAggregation",
+            "description": "The default or recommended aggregation type for this metric."
+          },
+          "minimumTimeInterval": {
+            "type": "integer",
+            "format": "int64",
+            "description": "The minimum time interval (amount of time represented in a single datapoint) for this metric. Requesting metric data with a lower interval that the minimum will result in errors."
+          },
+          "category": {
+            "type": "string",
+            "description": "The category of the metric. This value is used to organize and group metrics together."
+          }
+        },
+        "required": [
+          "metricName",
+          "minimumTimeInterval"
+        ]
+      },
+      "MetricMetadataResponse": {
+        "description": "The response to a metric metadata query.",
+        "$ref": "#/definitions/MetricMetadataElement"
+      },
+      "MetricMetadataElement": {
+        "type": "object",
+        "description": "The metadata for an individual metric.",
+        "properties": {
+          "metricName": {
+            "type": "string",
+            "description": "The name of the metric."
+          },
+          "displayName": {
+            "type": "string",
+            "description": "The display name of the metric."
+          },
+          "description": {
+            "type": "string",
+            "description": "A description of what the metric represents."
+          },
+          "unit": {
+            "$ref": "./commonMonitoringTypes.json#/definitions/MetricUnit",
+            "description": "The unit of the metric."
+          },
+          "primaryAggregationType": {
+            "$ref": "./commonMonitoringTypes.json#/definitions/MetricAggregation",
+            "description": "The default or recommended aggregation type for this metric."
+          },
+          "minimumTimeInterval": {
+            "type": "integer",
+            "format": "int64",
+            "description": "The minimum time interval (amount of time represented in a single datapoint) for this metric. Requesting metric data with a lower interval that the minimum will result in errors."
+          },
+          "category": {
+            "type": "string",
+            "description": "The category of the metric. This value is used to organize and group metrics together."
+          },
+          "aggregationTypes": {
+            "type": "object",
+            "description": "List of supported aggregation types for the metric and their respective supported dimension sets.",
+            "properties": {
+              "total": {
+                "$ref": "#/definitions/DimensionsPerAggregationType"
+              },
+              "count": {
+                "$ref": "#/definitions/DimensionsPerAggregationType"
+              },
+              "average": {
+                "$ref": "#/definitions/DimensionsPerAggregationType"
+              },
+              "minimum": {
+                "$ref": "#/definitions/DimensionsPerAggregationType"
+              },
+              "maximum": {
+                "$ref": "#/definitions/DimensionsPerAggregationType"
+              }
+            }
+          }
+        },
+        "required": [
+          "metricName",
+          "minimumTimeInterval"
+        ]
+      },
+      "DimensionsPerAggregationType": {
+        "type": "object",
+        "description": "Collection of sets of dimensions that are applicable for this aggregation type on this metric.",
+        "properties": {
+          "dimensionSets": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/DimensionSet"
+            },
+            "description": "Collection of dimension sets."
+          }
+        },
+        "required": [
+          "dimensionSets"
+        ]
+      },
+      "DimensionSet": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "description": "Collection of dimensions"
+      },
+      "MetricsDataplaneDimensionValuesResponse": {
+        "type": "object",
+        "description": "The response to a metric dimension values query.",
+        "properties": {
+          "value": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/DimensionValueElement"
+            },
+            "description": "Collection of dimension values for the given dimension"
+          }
+        },
+        "required": [
+          "value"
+        ]
+      },
+      "DimensionValueElement": {
+        "type": "object",
+        "description": "Describes a single dimension value for a dimension.",
+        "properties": {
+          "dimensionValue": {
+            "type": "string",
+            "description": "the value of the dimension."
+          }
+        },
+        "required": [
+          "dimensionValue"
+        ]
+      },
+      "MetricsDataplaneMetricResponse": {
+        "type": "object",
+        "description": "The response to a metrics data query.",
+        "properties": {
+          "startTime": {
+            "type": "string",
+            "format": "date-time",
+            "description": "The start time, in datetime format, for which the data was retrieved."
+          },
+          "endTime": {
+            "type": "string",
+            "format": "date-time",
+            "description": "The end time, in datetime format, for which the data was retrieved."
+          },
+          "intervalMs": {
+            "type": "integer",
+            "format": "int64",
+            "description": "The time interval (amount of time represented in a single datapoint) for which the metric data was returned in. In some cases the interval returned may be different from what was requested, for example if AutoAdjustTimeInterval was specified."
+          },
+          "value": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/MetricsDataplaneMetricData"
+            },
+            "description": "Collection of metric timeseries data requested."
+          }
+        },
+        "required": [
+          "startTime",
+          "endTime",
+          "value"
+        ]
+      },
+      "MetricsDataplaneMetricData": {
+        "type": "object",
+        "description": "The result data of a query.",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "the name of the metric."
+          },
+          "displayName": {
+            "type": "string",
+            "description": "the display name of the metric."
+          },
+          "unit": {
+            "$ref": "./commonMonitoringTypes.json#/definitions/MetricUnit",
+            "description": "The unit of the metric."
+          },
+          "timeSeries": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/TimeSeriesData"
+            },
+            "description": "the time series returned when a data query is performed."
+          }
+        },
+        "required": [
+          "name",
+          "timeSeries"
+        ]
+      },
+      "TimeSeriesData": {
+        "type": "object",
+        "description": "A time series result type.",
+        "properties": {
+          "metadatavalues": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/MetadataNameValuePair"
+            },
+            "description": "The metadata values returned if a filter was specified in the call."
+          },
+          "summary": {
+            "$ref": "#/definitions/SummaryValue",
+            "description": "The summary values returned if summary=true was specified in the call."
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/TimeSeriesDataPoint"
+            },
+            "description": "An array of data points representing the metric values.  This is only returned if a result type of data is specified."
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "MetadataNameValuePair": {
+        "type": "object",
+        "description": "Represents a metric metadata value in the form of a dimension name value pair.",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "the name of the metadata."
+          },
+          "displayName": {
+            "type": "string",
+            "description": "the display name of the metadata."
+          },
+          "value": {
+            "type": "string",
+            "description": "the value of the metadata."
+          }
+        },
+        "required": [
+          "name",
+          "value"
+        ]
+      },
+      "SummaryValue": {
+        "type": "object",
+        "description": "Represents a metric summary value.",
+        "properties": {
+          "average": {
+            "type": "number",
+            "format": "double",
+            "description": "The average value in the time range."
+          },
+          "minimum": {
+            "type": "number",
+            "format": "double",
+            "description": "The least value in the time range."
+          },
+          "maximum": {
+            "type": "number",
+            "format": "double",
+            "description": "The greatest value in the time range."
+          },
+          "total": {
+            "type": "number",
+            "format": "double",
+            "description": "The sum of all of the values in the time range."
+          },
+          "count": {
+            "type": "number",
+            "format": "double",
+            "description": "The number of samples in the time range. Can be used to determine the number of values that contributed to the average value."
+          }
+        }
+      },
+      "TimeSeriesDataPoint": {
+        "type": "object",
+        "description": "Represents a metric value.",
+        "required": [
+          "timeStamp"
+        ],
+        "properties": {
+          "timeStamp": {
+            "type": "string",
+            "format": "date-time",
+            "description": "The timestamp for the metric value in ISO 8601 format."
+          },
+          "average": {
+            "type": "number",
+            "format": "double",
+            "description": "The average value in the interval."
+          },
+          "minimum": {
+            "type": "number",
+            "format": "double",
+            "description": "The least value in the interval."
+          },
+          "maximum": {
+            "type": "number",
+            "format": "double",
+            "description": "The greatest value in the interval."
+          },
+          "total": {
+            "type": "number",
+            "format": "double",
+            "description": "The sum of all of the values in the interval."
+          },
+          "count": {
+            "type": "number",
+            "format": "double",
+            "description": "The number of samples in the interval. Can be used to determine the number of values that contributed to the average value."
+          }
+        }
+      }
+    }
+  }

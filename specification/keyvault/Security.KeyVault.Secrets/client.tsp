@@ -2,6 +2,7 @@ import "./main.tsp";
 import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
+using TypeSpec.Http;
 
 @@clientName(KeyVault, "Secret", "java");
 @@clientName(KeyVault, "Secret", "rust");
@@ -10,8 +11,23 @@ using Azure.ClientGenerator.Core;
 using KeyVault;
 
 // go renames
+
+/**
+ * The Get Secrets operation is applicable to the entire vault. However, only the base secret identifier and its attributes are provided in the response. Individual secret versions are not listed in the response. This operation requires the secrets/list permission.
+ */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation name is already established"
+@summary("List secrets in a specified key vault.")
+@route("/secrets")
+@get
+op listSecretProperties is KeyVaultOperation<
+  {
+  },
+  SecretListResult
+>;
+@@override(getSecrets, listSecretProperties);
+
 @@clientName(getDeletedSecrets, "ListDeletedSecretProperties", "go");
-@@clientName(getSecrets, "ListSecretProperties", "go");
 @@clientName(getSecretVersions, "ListSecretPropertiesVersions", "go");
 @@clientName(updateSecret, "UpdateSecretProperties", "go");
 

@@ -1,8 +1,13 @@
 import "./main.tsp";
 import "@azure-tools/typespec-client-generator-core";
+import "@azure-tools/typespec-azure-resource-manager";
 
 using Azure.ClientGenerator.Core;
+using TypeSpec.Versioning;
 using TypeSpec.Http;
+
+@versioned(KeyVault.Versions)
+namespace Customizations;
 
 @@clientName(KeyVault, "Secret", "java");
 @@clientName(KeyVault, "Secret", "rust");
@@ -25,11 +30,14 @@ op listSecretProperties is KeyVaultOperation<
   },
   SecretListResult
 >;
-@@override(getSecrets, listSecretProperties);
+
+//#suppress "@azure-tools/typespec-azure-core/override-parameters-mismatch" "Removing optional MaxResults parameter"
+@@override(getSecrets, listSecretProperties, "go");
 
 @@clientName(getDeletedSecrets, "ListDeletedSecretProperties", "go");
 @@clientName(getSecretVersions, "ListSecretPropertiesVersions", "go");
 @@clientName(updateSecret, "UpdateSecretProperties", "go");
+@@clientName(getSecrets, "ListSecretProperties", "go");
 
 // renaming SecretItem to SecretProperties.
 // renaming existing SecretProperties to something else

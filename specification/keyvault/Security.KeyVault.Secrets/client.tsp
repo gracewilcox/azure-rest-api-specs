@@ -31,8 +31,43 @@ op listSecretProperties is KeyVaultOperation<
   SecretListResult
 >;
 
-//#suppress "@azure-tools/typespec-azure-core/override-parameters-mismatch" "Removing optional MaxResults parameter"
+/**
+ * The Get Deleted Secrets operation returns the secrets that have been deleted for a vault enabled for soft-delete. This operation requires the secrets/list permission.
+ */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation name is already established"
+@summary("Lists deleted secrets for the specified vault.")
+@route("/deletedsecrets")
+@get
+op listDeletedSecretProperties is KeyVaultOperation<
+  {
+  },
+  DeletedSecretListResult
+>;
+
+/**
+ * The full secret identifier and attributes are provided in the response. No values are returned for the secrets. This operations requires the secrets/list permission.
+ */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation name is already established"
+@summary("List all versions of the specified secret.")
+@route("/secrets/{secret-name}/versions")
+@get
+op listSecretPropertiesVersions is KeyVaultOperation<
+  {
+    /**
+     * The name of the secret.
+     */
+    @path("secret-name")
+    @clientName("name", "go")
+    secretName: string;
+  },
+  SecretListResult
+>;
+
 @@override(getSecrets, listSecretProperties, "go");
+@@override(getDeletedSecrets, listDeletedSecretProperties, "go");
+@@override(getSecretVersions, listSecretPropertiesVersions, "go");
 
 @@clientName(getDeletedSecrets, "ListDeletedSecretProperties", "go");
 @@clientName(getSecretVersions, "ListSecretPropertiesVersions", "go");

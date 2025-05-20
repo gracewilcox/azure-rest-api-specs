@@ -25,11 +25,7 @@ using KeyVault;
 @summary("List secrets in a specified key vault.")
 @route("/secrets")
 @get
-op listSecretProperties is KeyVaultOperation<
-  {
-  },
-  SecretListResult
->;
+op listSecretProperties is KeyVaultOperation<{}, SecretListResult>;
 
 /**
  * The Get Deleted Secrets operation returns the secrets that have been deleted for a vault enabled for soft-delete. This operation requires the secrets/list permission.
@@ -39,11 +35,7 @@ op listSecretProperties is KeyVaultOperation<
 @summary("Lists deleted secrets for the specified vault.")
 @route("/deletedsecrets")
 @get
-op listDeletedSecretProperties is KeyVaultOperation<
-  {
-  },
-  DeletedSecretListResult
->;
+op listDeletedSecretProperties is KeyVaultOperation<{}, DeletedSecretListResult>;
 
 /**
  * The full secret identifier and attributes are provided in the response. No values are returned for the secrets. This operations requires the secrets/list permission.
@@ -55,12 +47,7 @@ op listDeletedSecretProperties is KeyVaultOperation<
 @get
 op listSecretPropertiesVersions is KeyVaultOperation<
   {
-    /**
-     * The name of the secret.
-     */
-    @path("secret-name")
-    @clientName("name", "go")
-    secretName: string;
+    ...SecretNameParameter;
   },
   SecretListResult
 >;

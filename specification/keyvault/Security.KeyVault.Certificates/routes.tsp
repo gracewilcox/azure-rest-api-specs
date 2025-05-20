@@ -9,6 +9,14 @@ using TypeSpec.Http;
 
 namespace KeyVault;
 
+model IncludePendingParameter {
+  /**
+   * Specifies whether to include certificates which are not completely provisioned.
+   */
+  @query("includePending")
+  includePending?: boolean;
+}
+
 /**
  * The GetCertificates operation returns the set of certificates resources in the specified key vault. This operation requires the certificates/list permission.
  */
@@ -25,14 +33,9 @@ op getCertificates is KeyVaultOperation<
     @maxValue(25)
     @minValue(1)
     @query("maxresults")
-    @clientName("MaxResults", "go")
     maxresults?: int32;
 
-    /**
-     * Specifies whether to include certificates which are not completely provisioned.
-     */
-    @query("includePending")
-    includePending?: boolean;
+    ...IncludePendingParameter;
   },
   CertificateListResult
 >;
@@ -108,11 +111,11 @@ op getCertificateIssuers is KeyVaultOperation<
     @maxValue(25)
     @minValue(1)
     @query("maxresults")
-    @clientName("MaxResults", "go")
     maxresults?: int32;
   },
   CertificateIssuerListResult
 >;
+
 
 /**
  * The SetCertificateIssuer operation adds or updates the specified certificate issuer. This operation requires the certificates/setissuers permission.
@@ -263,6 +266,15 @@ op importCertificate is KeyVaultOperation<
   CertificateBundle
 >;
 
+model CertificateNameParameter {
+  /**
+   * The name of the certificate.
+   */
+  @path("certificate-name")
+  @clientName("name", "go")
+  certificateName: string;
+}
+
 /**
  * The GetCertificateVersions operation returns the versions of a certificate in the specified key vault. This operation requires the certificates/list permission.
  */
@@ -273,12 +285,7 @@ op importCertificate is KeyVaultOperation<
 @get
 op getCertificateVersions is KeyVaultOperation<
   {
-    /**
-     * The name of the certificate.
-     */
-    @path("certificate-name")
-    @clientName("name", "go")
-    certificateName: string;
+    ...CertificateNameParameter,
 
     /**
      * Maximum number of results to return in a page. If not specified the service will return up to 25 results.
@@ -286,7 +293,6 @@ op getCertificateVersions is KeyVaultOperation<
     @maxValue(25)
     @minValue(1)
     @query("maxresults")
-    @clientName("MaxResults", "go")
     maxresults?: int32;
   },
   CertificateListResult
@@ -542,14 +548,9 @@ op getDeletedCertificates is KeyVaultOperation<
     @maxValue(25)
     @minValue(1)
     @query("maxresults")
-    @clientName("MaxResults", "go")
     maxresults?: int32;
 
-    /**
-     * Specifies whether to include certificates which are not completely provisioned.
-     */
-    @query("includePending")
-    includePending?: boolean;
+   ...IncludePendingParameter,
   },
   DeletedCertificateListResult
 >;

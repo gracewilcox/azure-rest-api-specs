@@ -170,6 +170,15 @@ op getKey is KeyVaultOperation<
   KeyBundle
 >;
 
+model KeyNameParameter {
+  /**
+   * The name of the key.
+   */
+  @path("key-name")
+  @clientName("name", "go")
+  keyName: string;
+}
+
 /**
  * The full key identifier, attributes, and tags are provided in the response. This operation requires the keys/list permission.
  */
@@ -180,12 +189,7 @@ op getKey is KeyVaultOperation<
 @get
 op getKeyVersions is KeyVaultOperation<
   {
-    /**
-     * The name of the key.
-     */
-    @path("key-name")
-    @clientName("name", "go")
-    keyName: string;
+   ...KeyNameParameter,
 
     /**
      * Maximum number of results to return in a page. If not specified the service will return up to 25 results.
@@ -193,7 +197,6 @@ op getKeyVersions is KeyVaultOperation<
     @maxValue(25)
     @minValue(1)
     @query("maxresults")
-    @clientName("MaxResults", "go")
     maxresults?: int32;
   },
   KeyListResult
@@ -215,7 +218,6 @@ op getKeys is KeyVaultOperation<
     @maxValue(25)
     @minValue(1)
     @query("maxresults")
-    @clientName("MaxResults", "go")
     maxresults?: int32;
   },
   KeyListResult
@@ -526,7 +528,6 @@ op getDeletedKeys is KeyVaultOperation<
     @maxValue(25)
     @minValue(1)
     @query("maxresults")
-    @clientName("MaxResults", "go")
     maxresults?: int32;
   },
   DeletedKeyListResult

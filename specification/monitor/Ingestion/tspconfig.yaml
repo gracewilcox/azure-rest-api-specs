@@ -40,3 +40,13 @@ options:
     package-dir: "azure-monitor-ingestion"
     namespace: com.azure.monitor.ingestion
     flavor: azure
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/monitor/ingestion"
+    package-dir: "azlogs"
+    module: "github.com/Azure/azure-sdk-for-go/sdk/monitor/ingestion/azlogs"
+    module-version: "0.0.1"
+    emitter-output-dir: "{project-root}"
+    override-client-name: "Client"
+    single-client: true
+    inject-spans: true
+    rawjson-as-bytes: true

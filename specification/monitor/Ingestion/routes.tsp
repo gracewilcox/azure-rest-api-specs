@@ -33,6 +33,8 @@ op upload is Azure.Core.Foundations.Operation<
 
     #suppress "@azure-tools/typespec-azure-core/request-body-problem"
     @doc("The array of objects matching the schema defined by the provided stream.")
+    @alternateType(unknown, "go")
+    @clientName("logs", "go")
     @body
     body: Record<unknown>[];
 
